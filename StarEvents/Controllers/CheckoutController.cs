@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StarEvents.Helpers;
 using QRCoder;
 using StarEvents.Models;
 using StarEvents.ViewModels;
@@ -328,6 +329,17 @@ namespace StarEvents.Controllers
                 EntityType = "Booking"
             });
             db.SaveChanges();
+
+            // Send booking confirmation email (ignore failures)
+            try
+            {
+                var tickets = db.Tickets.Where(t => t.BookingId == booking.BookingId).ToList();
+                EmailService.SendBookingConfirmation(user.Email, booking, @event, tickets);
+            }
+            catch
+            {
+                // ignore email errors
+            }
 
             // Redirect to the ticket controller
             return RedirectToAction("Eticket", "Ticket", new { bookingId = booking.BookingId });

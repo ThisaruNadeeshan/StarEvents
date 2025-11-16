@@ -130,6 +130,17 @@ namespace StarEvents.Controllers
                     }
 
                     db.SaveChanges();
+
+                    // Try to send welcome email (do not block or fail registration if email fails)
+                    try
+                    {
+                        EmailService.SendWelcomeEmail(newUser.Email, newUser.Username, newUser.Role);
+                    }
+                    catch
+                    {
+                        // ignore email errors
+                    }
+
                     TempData["Message"] = "Registration successful! You can now login.";
                     return RedirectToAction("Index", "Login");
                 }

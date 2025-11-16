@@ -258,6 +258,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\EmailService.cs" />
     <Compile Include="Helpers\ImageStorage.cs" />
     <Compile Include="Migrations\202511160830182_InitialCreate.cs" />
     <Compile Include="Migrations\202511160830182_InitialCreate.Designer.cs">
