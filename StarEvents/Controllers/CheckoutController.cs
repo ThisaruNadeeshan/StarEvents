@@ -261,11 +261,7 @@ namespace StarEvents.Controllers
             }
             db.SaveChanges();
 
-            string qrFolder = Server.MapPath("~/Content/QRCodes");
-            if (!Directory.Exists(qrFolder))
-                Directory.CreateDirectory(qrFolder);
-
-            // Generate QR code for each ticket
+            // Generate QR code for each ticket and upload to ImageKit
             for (int i = 0; i < model.Quantity; i++)
             {
                 string qrData = $"Booking:{booking.BookingId};Event:{@event.Title};User:{customerProfile.FullName};Seat:{seatCategory.CategoryName};No:{i + 1}/{model.Quantity}";
@@ -273,12 +269,17 @@ namespace StarEvents.Controllers
                 using (var qrDataObj = qrGen.CreateQrCode(qrData, QRCodeGenerator.ECCLevel.Q))
                 using (var qrCode = new QRCode(qrDataObj))
                 using (var bitmap = qrCode.GetGraphic(20))
+                using (var ms = new MemoryStream())
                 {
+                    bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    var bytes = ms.ToArray();
                     string qrFileName = $"qr_{booking.BookingId}_{i + 1}_{Guid.NewGuid():N}.png";
-                    string qrFilePath = Path.Combine(qrFolder, qrFileName);
-                    string qrUrl = "/Content/QRCodes/" + qrFileName;
 
-                    bitmap.Save(qrFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    var qrUrl = StarEvents.Helpers.ImageStorage.UploadBytes(
+                        bytes,
+                        qrFileName,
+                        "/starevents/qrcodes"
+                    );
 
                     var ticket = new Ticket
                     {

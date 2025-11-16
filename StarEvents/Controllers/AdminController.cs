@@ -240,7 +240,7 @@ namespace StarEvents.Controllers
                 }
                 // else: optionally, create a new Admin row here
             }
-            else if (string.Equals(user.Role, "Customer", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(user.Role, "Customer", StringComparison.OrdinalIgnoreCase))
             {
                 var customer = db.CustomerProfiles.FirstOrDefault(c => c.CustomerId == user.UserId);
                 if (customer != null)
@@ -252,19 +252,22 @@ namespace StarEvents.Controllers
                     customer.DateOfBirth = model.CustomerDateOfBirth;
                     customer.Gender = model.CustomerGender;
 
-                    // Photo upload handling
-                    if (ProfilePhotoUpload != null && ProfilePhotoUpload.ContentLength > 0)
-                    {
-                        var fileName = Guid.NewGuid() + System.IO.Path.GetExtension(ProfilePhotoUpload.FileName);
-                        var uploadDir = "~/uploads";
-                        var uploadPath = System.IO.Path.Combine(Server.MapPath(uploadDir), fileName);
-                        ProfilePhotoUpload.SaveAs(uploadPath);
-                        customer.ProfilePhoto = "uploads/" + fileName;
-                    }
-                    else
-                    {
-                        customer.ProfilePhoto = model.CustomerProfilePhoto; // keep existing if not uploading new
-                    }
+                        // Photo upload handling via ImageKit
+                        if (ProfilePhotoUpload != null && ProfilePhotoUpload.ContentLength > 0)
+                        {
+                            var url = StarEvents.Helpers.ImageStorage.UploadHttpFile(
+                                ProfilePhotoUpload,
+                                "/starevents/profiles/customers"
+                            );
+                            if (!string.IsNullOrEmpty(url))
+                            {
+                                customer.ProfilePhoto = url;
+                            }
+                        }
+                        else
+                        {
+                            customer.ProfilePhoto = model.CustomerProfilePhoto; // keep existing if not uploading new
+                        }
                 }
                 // else: optionally, create a CustomerProfiles row here
             }
@@ -279,14 +282,17 @@ namespace StarEvents.Controllers
                     organizer.Address = model.OrganizerAddress;
                     organizer.Description = model.OrganizerDescription;
 
-                    // Photo upload handling
+                    // Photo upload handling via ImageKit
                     if (ProfilePhotoUpload != null && ProfilePhotoUpload.ContentLength > 0)
                     {
-                        var fileName = Guid.NewGuid() + System.IO.Path.GetExtension(ProfilePhotoUpload.FileName);
-                        var uploadDir = "~/uploads";
-                        var uploadPath = System.IO.Path.Combine(Server.MapPath(uploadDir), fileName);
-                        ProfilePhotoUpload.SaveAs(uploadPath);
-                        organizer.ProfilePhoto = "uploads/" + fileName;
+                        var url = StarEvents.Helpers.ImageStorage.UploadHttpFile(
+                            ProfilePhotoUpload,
+                            "/starevents/profiles/organizers"
+                        );
+                        if (!string.IsNullOrEmpty(url))
+                        {
+                            organizer.ProfilePhoto = url;
+                        }
                     }
                     else
                     {

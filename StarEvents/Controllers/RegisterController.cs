@@ -7,6 +7,7 @@ using StarEvents.Models;
 using StarEvents.Helpers;
 using System.Data.Entity.Validation;
 
+
 namespace StarEvents.Controllers
 {
     public class RegisterController : Controller
@@ -80,31 +81,21 @@ namespace StarEvents.Controllers
                     db.Users.Add(newUser);
                     db.SaveChanges(); // Save first to get UserId
 
-                    // ---- HANDLE FILE UPLOAD ----
+                    // ---- HANDLE FILE UPLOAD via ImageKit ----
                     string photoUrl = null;
                     if (model.Role == "Customer" && CustomerProfilePhoto != null && CustomerProfilePhoto.ContentLength > 0)
                     {
-                        string uploadsDir = Server.MapPath("~/uploads/");
-                        if (!Directory.Exists(uploadsDir))
-                            Directory.CreateDirectory(uploadsDir);
-
-                        string extension = Path.GetExtension(CustomerProfilePhoto.FileName);
-                        string fileName = $"customer_{Guid.NewGuid()}{extension}";
-                        string filePath = Path.Combine(uploadsDir, fileName);
-                        CustomerProfilePhoto.SaveAs(filePath);
-                        photoUrl = "/uploads/" + fileName;
+                        photoUrl = ImageStorage.UploadHttpFile(
+                            CustomerProfilePhoto,
+                            "/starevents/profiles/customers"
+                        );
                     }
                     else if (model.Role == "Organizer" && OrganizerProfilePhoto != null && OrganizerProfilePhoto.ContentLength > 0)
                     {
-                        string uploadsDir = Server.MapPath("~/uploads/");
-                        if (!Directory.Exists(uploadsDir))
-                            Directory.CreateDirectory(uploadsDir);
-
-                        string extension = Path.GetExtension(OrganizerProfilePhoto.FileName);
-                        string fileName = $"organizer_{Guid.NewGuid()}{extension}";
-                        string filePath = Path.Combine(uploadsDir, fileName);
-                        OrganizerProfilePhoto.SaveAs(filePath);
-                        photoUrl = "/uploads/" + fileName;
+                        photoUrl = ImageStorage.UploadHttpFile(
+                            OrganizerProfilePhoto,
+                            "/starevents/profiles/organizers"
+                        );
                     }
 
                     // Depending on Role, insert into correct table

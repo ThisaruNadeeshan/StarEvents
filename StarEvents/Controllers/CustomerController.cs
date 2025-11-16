@@ -105,15 +105,14 @@ namespace StarEvents.Controllers
 
                 if (CustomerProfilePhoto != null && CustomerProfilePhoto.ContentLength > 0)
                 {
-                    string uploadsDir = Server.MapPath("~/uploads/");
-                    if (!Directory.Exists(uploadsDir))
-                        Directory.CreateDirectory(uploadsDir);
-
-                    string extension = Path.GetExtension(CustomerProfilePhoto.FileName);
-                    string fileName = $"customer_{Guid.NewGuid()}{extension}";
-                    string filePath = Path.Combine(uploadsDir, fileName);
-                    CustomerProfilePhoto.SaveAs(filePath);
-                    customer.ProfilePhoto = "/uploads/" + fileName; 
+                    var url = ImageStorage.UploadHttpFile(
+                        CustomerProfilePhoto,
+                        "/starevents/profiles/customers"
+                    );
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        customer.ProfilePhoto = url;
+                    }
                 }
                 db.SaveChanges();
                 return RedirectToAction("Profile");

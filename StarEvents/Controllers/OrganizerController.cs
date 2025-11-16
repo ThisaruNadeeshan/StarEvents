@@ -143,12 +143,15 @@ namespace StarEvents.Controllers
                 // Handle profile photo upload if present
                 if (ProfilePhotoUpload != null && ProfilePhotoUpload.ContentLength > 0)
                 {
-                    var fileName = System.IO.Path.GetFileName(ProfilePhotoUpload.FileName);
-                    var filePath = "/uploads/organizer_" + Guid.NewGuid() + "_" + fileName;
-                    var serverPath = Server.MapPath("~" + filePath);
-                    ProfilePhotoUpload.SaveAs(serverPath);
-                    organizer.ProfilePhoto = filePath;
-                    Session["ProfilePhoto"] = filePath;
+                    var url = ImageStorage.UploadHttpFile(
+                        ProfilePhotoUpload,
+                        "/starevents/profiles/organizers"
+                    );
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        organizer.ProfilePhoto = url;
+                        Session["ProfilePhoto"] = url;
+                    }
                 }
 
                 db.SaveChanges();
@@ -187,11 +190,10 @@ namespace StarEvents.Controllers
                 string imageUrl = null;
                 if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
                 {
-                    var fileName = System.IO.Path.GetFileName(model.ImageFile.FileName);
-                    var filePath = "/uploads/events/" + Guid.NewGuid() + "_" + fileName;
-                    var serverPath = Server.MapPath("~" + filePath);
-                    model.ImageFile.SaveAs(serverPath);
-                    imageUrl = filePath;
+                    imageUrl = ImageStorage.UploadHttpFile(
+                        model.ImageFile,
+                        "/starevents/events"
+                    );
                 }
 
                 Venue venue = db.Venues.FirstOrDefault(v => v.VenueName == model.VenueName.Trim());
@@ -432,11 +434,14 @@ namespace StarEvents.Controllers
 
                 if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
                 {
-                    var fileName = System.IO.Path.GetFileName(model.ImageFile.FileName);
-                    var filePath = "/uploads/events/" + Guid.NewGuid() + "_" + fileName;
-                    var serverPath = Server.MapPath("~" + filePath);
-                    model.ImageFile.SaveAs(serverPath);
-                    evt.ImageUrl = filePath;
+                    var url = ImageStorage.UploadHttpFile(
+                        model.ImageFile,
+                        "/starevents/events"
+                    );
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        evt.ImageUrl = url;
+                    }
                 }
 
                 evt.UpdatedAt = DateTime.Now;
