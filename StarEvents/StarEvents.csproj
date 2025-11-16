@@ -199,6 +199,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Migrations\202511160830182_InitialCreate.cs" />
+    <Compile Include="Migrations\202511160830182_InitialCreate.Designer.cs">
+      <DependentUpon>202511160830182_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivityLog.cs">
       <DependentUpon>StarEventsModel.tt</DependentUpon>
     </Compile>
@@ -265,21 +270,7 @@
     <Compile Include="Models\SeatCategory.cs">
       <DependentUpon>StarEventsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StarEventsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StarEventsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StarEventsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StarEventsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StarEventsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StarEventsModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\StarEventsModel.Context.cs" />
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>StarEventsModel.tt</DependentUpon>
     </Compile>
@@ -322,16 +313,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\StarEventsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StarEventsModel.edmx</DependentUpon>
-      <LastGenOutput>StarEventsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\StarEventsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StarEventsModel.edmx</DependentUpon>
-      <LastGenOutput>StarEventsModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -343,13 +324,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\StarEventsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StarEventsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\StarEventsModel.edmx.diagram">
-      <DependentUpon>StarEventsModel.edmx</DependentUpon>
-    </Content>
     <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -463,6 +437,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202511160830182_InitialCreate.resx">
+      <DependentUpon>202511160830182_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
