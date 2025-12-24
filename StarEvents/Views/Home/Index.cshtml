@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1259f3;
-            --primary-hover: #0d47c1;
-            --secondary-color: #1a237e;
-            --accent-color: #ffc107;
+            --primary-color: #1B211A;
+            --primary-hover: #2A3329;
+            --secondary-color: #FFB800;
+            --accent-color: #FC5130;
             --light-text-color: #f8f9fa;
             --dark-text-color: #181c32;
-            --card-shadow: 0 4px 24px rgba(18,89,243,0.09);
+            --card-shadow: 0 4px 24px rgba(27, 33, 26, 0.09);
             --border-radius: 20px;
             --section-bg: #f5f7fa;
             --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            --gradient-accent: linear-gradient(135deg, #03A9F4 0%, #3F51B5 100%);
+            --gradient-accent: linear-gradient(135deg, #FC5130 0%, #FFB800 100%);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,7 +89,7 @@
             align-items: center;
             background-color: #fff;
             border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(18,89,243,0.15);
+            box-shadow: 0 8px 30px rgba(27, 33, 26,0.15);
             max-width: 610px;
             width: 100%;
             padding-left: 24px;
@@ -98,7 +98,7 @@
             border: 2px solid transparent;
         }
         .hero-search-bar:focus-within {
-            box-shadow: 0 12px 40px rgba(18,89,243,0.25);
+            box-shadow: 0 12px 40px rgba(27, 33, 26,0.25);
             border-color: rgba(255,255,255,0.3);
             transform: translateY(-2px);
         }
@@ -123,13 +123,13 @@
             margin-right: 8px; margin-left: 8px; cursor: pointer;
             transition: all 0.3s ease;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px rgba(18,89,243,0.2);
+            box-shadow: 0 4px 12px rgba(27, 33, 26,0.2);
         }
         .hero-search-bar button[type="submit"]:hover,
         .hero-search-bar button[type="submit"]:focus {
             background: var(--primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(18,89,243,0.3);
+            box-shadow: 0 6px 16px rgba(27, 33, 26,0.3);
         }
 
         /* Featured Events Grid */
@@ -178,7 +178,7 @@
             color: #fff;
             border: 1.5px solid var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(18,89,243,0.2);
+            box-shadow: 0 4px 12px rgba(27, 33, 26,0.2);
         }
 
         .event-cards-grid {
@@ -196,7 +196,7 @@
             min-width: 0;
             background: #fff;
             border-radius: 18px;
-            box-shadow: 0 2px 20px rgba(18,89,243,0.09);
+            box-shadow: 0 2px 20px rgba(27, 33, 26,0.09);
             border: 1px solid #eceef2;
             display: flex;
             flex-direction: column;
@@ -205,7 +205,7 @@
             transition: box-shadow .17s, transform .17s;
         }
         .event-card-modern:hover {
-            box-shadow: 0 8px 32px rgba(18,89,243,0.15);
+            box-shadow: 0 8px 32px rgba(27, 33, 26,0.15);
             transform: translateY(-3px) scale(1.012);
         }
         .event-card-img-wrap-modern {
@@ -229,7 +229,7 @@
         .event-category-badge-modern {
             position: absolute;
             top: 14px; left: 14px;
-            background: #2563eb;
+            background: #1B211A;
             color: #fff;
             border-radius: 24px;
             font-size: 0.96rem;
@@ -238,7 +238,7 @@
             display: flex;
             align-items: center;
             gap: 7px;
-            box-shadow: 0 1.5px 7px rgba(37,99,235,0.15);
+            box-shadow: 0 1.5px 7px rgba(27, 33, 26, 0.15);
             z-index: 2;
         }
         .event-category-badge-modern i { color: #fff; font-size: 1.02em; }
@@ -281,7 +281,7 @@
         .event-card-price-modern {
             font-size: 1.06rem;
             font-weight: 700;
-            color: #2563eb;
+            color: #1B211A;
             margin-bottom: 16px;
             display: flex;
             align-items: baseline;
@@ -291,7 +291,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1.10rem;
             font-weight: 800;
-            color: #2563eb;
+            color: #1B211A;
         }
         .event-upwards {
             color: #7b8499;
@@ -300,7 +300,7 @@
         }
         .event-card-btn-modern {
             width: 100%;
-            background: #2563eb;
+            background: #1B211A;
             color: #fff;
             border: none;
             border-radius: 0 0 18px 18px;
@@ -311,16 +311,16 @@
             text-decoration: none;
             transition: background .15s, box-shadow .16s;
             margin-top: auto;
-            box-shadow: 0 2px 8px rgba(37,99,235,0.10);
+            box-shadow: 0 2px 8px rgba(27, 33, 26, 0.10);
             letter-spacing: 0.01em;
             cursor: pointer;
             display: block;
         }
         .event-card-btn-modern:hover, .event-card-btn-modern:focus {
-            background: #1a48b9;
+            background: #2A3329;
             color: #fff;
             text-decoration: none;
-            box-shadow: 0 4px 18px rgba(37,99,235,0.16);
+            box-shadow: 0 4px 18px rgba(27, 33, 26, 0.16);
         }
 
         /* Category Cards Section */
@@ -332,7 +332,6 @@
         .category-card {
             background: #fff;
             border-radius: 24px;
-            box-shadow: 0 8px 30px rgba(18,89,243,0.1);
             min-width: 220px; max-width: 240px; width: 100%; height: 200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: all 0.3s ease;
@@ -347,11 +346,11 @@
         }
         .category-card:hover, .category-card:focus {
             background: #fff; color: var(--primary-color);
-            box-shadow: 0 15px 40px rgba(18,89,243,0.2);
+            box-shadow: 0 15px 40px rgba(27, 33, 26,0.2);
             text-decoration: none; transform: translateY(-8px);
         }
         .category-icon { font-size: 3.2rem; color: var(--primary-color); margin-bottom: 0.8em; transition: all 0.3s ease; }
-        .category-card:hover .category-icon { transform: scale(1.1); color: #2196F3; }
+        .category-card:hover .category-icon { transform: scale(1.1); color: #FFB800; }
         .category-label { font-size: 1.1rem; font-weight: 700; color: #232b36; margin-top: 0.25em; letter-spacing: 0.01em; text-align: center; }
 
         /* Loyalty Promo Banner */
@@ -368,7 +367,7 @@
         .loyalty-promo-inner {
             background: var(--gradient-primary);
             border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(18,89,243,0.15);
+            box-shadow: 0 15px 40px rgba(27, 33, 26,0.15);
             color: #fff; max-width: 1200px; width: 100%; min-height: 280px;
             padding: 60px;
             display: flex; align-items: center; justify-content: space-between; gap: 40px;
@@ -404,6 +403,9 @@
         .loyalty-promo-illus img {
             max-height: 220px; width: auto; object-fit: contain; display: block;
             filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); position: relative; z-index: 2;
+        }
+        .text-primary {
+            color: var(--primary-color) !important;
         }
     </style>
 </head>

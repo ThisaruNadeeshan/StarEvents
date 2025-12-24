@@ -1,15 +1,15 @@
 ﻿:root {
-    --primary-color: #1259f3;
-    --secondary-color: #1a237e;
-    --accent-color: #ffc107;
+    --primary-color: #1B211A;
+    --secondary-color: #FFB800;
+    --accent-color: #FC5130;
     --light-text-color: #f8f9fa;
     --dark-text-color: #444444;
-    --footer-bg: #031230;
-    --footer-bottom-bg: #031230;
+    --footer-bg: #1B211A;
+    --footer-bottom-bg: #1B211A;
     --footer-link: #b8c4d7;
-    --footer-link-hover: #ffc107;
-    --footer-social-bg: #10204a;
-    --footer-border: #1c3661;
+    --footer-link-hover: #FFB800;
+    --footer-social-bg: #2A3329;
+    --footer-border: #2A3329;
 }
 
 * {
@@ -73,8 +73,8 @@ h1, h2, h3, h4, h5, h6, .brand-text {
 
 /* Active link styles */
 .navbar-nav .nav-item.active .nav-link {
-    /* KEPT: Active link color is #025beb */
-    color: #025beb !important;
+    /* Updated: Active link color uses secondary color */
+    color: #FFB800 !important;
     font-weight: 700 !important;
 }
 
@@ -120,7 +120,7 @@ h1, h2, h3, h4, h5, h6, .brand-text {
 
 /* The Sign In Button */
 .btn-login {
-    background: #1259f3;
+    background: #1B211A;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -135,7 +135,7 @@ h1, h2, h3, h4, h5, h6, .brand-text {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(18,89,243,0.08);
+    box-shadow: 0 2px 6px rgba(27, 33, 26, 0.08);
 }
 
 .btn-login:hover {
@@ -446,4 +446,45 @@ main {
         /* Icon color is light/white on hover for contrast */
         color: var(--light-text-color) !important;
     }
+
+/* ---------------------------------- */
+/* DROPDOWN MENU STYLING */
+/* ---------------------------------- */
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 20px rgba(27, 33, 26, 0.15);
+    border-radius: 12px;
+    padding: 8px 0;
+    margin-top: 8px;
+}
+
+.dropdown-item {
+    color: var(--dark-text-color);
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: rgba(27, 33, 26, 0.08);
+    color: var(--primary-color);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.dropdown-item-text {
+    padding: 10px 20px;
+    color: var(--dark-text-color);
+}
+
+.dropdown-divider {
+    border-top-color: rgba(27, 33, 26, 0.1);
+    margin: 8px 0;
+}
 
