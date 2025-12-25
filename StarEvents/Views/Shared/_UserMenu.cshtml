@@ -15,8 +15,14 @@
     <!-- Not logged in: show Login/Register as BUTTONS -->
     <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item d-flex align-items-center">
-            <a class="nav-link mr-2" href="@Url.Action("Index","Register")" >Register</a>
-            <a class="btn btn-login"href="@Url.Action("Index","Login")">Login</a>
+            <a class="btn btn-login text-black-hover" href="@Url.Action("Index","Login")">Login</a>
+            <style>
+                .btn-login.text-black-hover:hover, 
+                .btn-login.text-black-hover:focus {
+                    color: #181c32 !important;
+                }
+            </style>
+            <a class="nav-link mr-2"  href="@Url.Action("Index","Register")" >Register</a>
         </li>
     </ul>
 }

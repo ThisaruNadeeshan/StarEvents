@@ -23,8 +23,7 @@
         <div class="container">
             @* Brand/Logo Section *@
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="@Url.Content("~/Content/logo-noBG.png")" alt="StarEvents" class="logo-img" style="height: 30px;">
-                <span class="brand-text font-weight-bold ml-2">StarEvents</span>
+                <img src="@Url.Content("~/Content/start_event_logo.png")" alt="StarEvents" class="logo-img" style="height: 50px;">
             </a>
 
             @* Toggler Button *@
@@ -39,8 +38,8 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item @Html.IsActive("Home", "Index")"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item @Html.IsControllerActive("Events")"><a class="nav-link" href="/Events">Events</a></li>
-                    <li class="nav-item @Html.IsActive("Home", "About")"><a class="nav-link" href="/Home/About">About Us</a></li>
-                    <li class="nav-item @Html.IsActive("Home", "Contact")"><a class="nav-link" href="/Home/Contact">Contact Us</a></li>
+                    <li class="nav-item @Html.IsActive("Home", "About")"><a class="nav-link" href="/Home/About">About</a></li>
+                    <li class="nav-item @Html.IsActive("Home", "Contact")"><a class="nav-link" href="/Home/Contact">Contact</a></li>
                 </ul>
 
                 @* USER MENU OR LOGIN/REGISTER (safe partial via child action) *@
