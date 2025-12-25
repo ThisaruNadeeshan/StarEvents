@@ -43,102 +43,247 @@
         .bg-offwhite { background: #f5f7fa; }
         .bg-white { background: #fff; }
 
+        /* Hero Banner - Ultra Modern Design */
         .hero-banner-custom {
             width: 100vw;
             position: relative;
             left: 50%; right: 50%;
             margin-left: -50vw; margin-right: -50vw;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             color: #fff;
-            padding: 100px 0 80px 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 140px 0 120px 0;
             overflow: hidden;
+            position: relative;
         }
         .hero-banner-custom::before {
             content: '';
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.03"><polygon points="0,0 1000,50 1000,100 0,100"></polygon></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 184, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(252, 81, 48, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(27, 33, 26, 0.4) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-banner-custom::after {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+            pointer-events: none;
+            z-index: 1;
         }
         .hero-banner-custom .container {
             position: relative; z-index: 2;
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            text-align: center;
         }
         .hero-banner-custom h1 {
-            font-weight: 800;
-            font-size: 3.5rem;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-            line-height: 1.1;
+            font-weight: 900;
+            font-size: 4.5rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 24px;
+            line-height: 1.05;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
         }
         .hero-banner-custom p.lead {
-            color: #dbeafe;
-            font-size: 1.4rem;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.5rem;
+            font-weight: 400;
             margin-bottom: 0;
-            max-width: 600px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+            letter-spacing: -0.01em;
+            text-align: center;
         }
         .hero-search-bar-wrapper {
             display: flex;
-            justify-content: flex-start;
-            margin-top: 40px;
+            justify-content: center;
+            margin-top: 56px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
         }
         .hero-search-bar {
             display: flex;
             align-items: center;
-            background-color: #fff;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(27, 33, 26,0.15);
-            max-width: 610px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 999px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                0 1px 0 rgba(255, 255, 255, 0.2) inset;
+            max-width: 700px;
             width: 100%;
-            padding-left: 24px;
-            height: 70px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            padding-left: 28px;
+            height: 80px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         .hero-search-bar:focus-within {
-            box-shadow: 0 12px 40px rgba(27, 33, 26,0.25);
-            border-color: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 4px rgba(255, 184, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            border-color: rgba(255, 184, 0, 0.4);
+            transform: translateY(-4px) scale(1.01);
+            background: rgba(255, 255, 255, 1);
         }
         .hero-search-bar .search-icon {
             display: flex; align-items: center; justify-content: center;
-            margin-right: 12px; color: #23436e;
+            margin-right: 20px; color: var(--primary-color);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        .hero-search-bar:focus-within .search-icon {
+            transform: scale(1.1);
+            color: var(--secondary-color);
         }
         .hero-search-bar input[type="search"] {
             border: none; outline: none;
-            background: transparent; color: #23436e;
-            font-size: 1.2rem; font-weight: 500;
-            flex: 1 1 auto; height: 64px; padding-left: 0; padding-right: 10px;
+            background: transparent; color: var(--text-primary);
+            font-size: 1.15rem; font-weight: 500;
+            flex: 1 1 auto; height: 100%;
+            padding-left: 0; padding-right: 16px;
+            font-family: inherit;
         }
         .hero-search-bar input[type="search"]::placeholder {
-            color: #89a2c0; opacity: 1; font-weight: 500;
+            color: var(--text-tertiary); opacity: 1;
+            font-weight: 400; letter-spacing: 0.01em;
         }
         .hero-search-bar button[type="submit"] {
-            background: var(--primary-color); color: #fff;
-            border: none; border-radius: 12px;
-            font-size: 1.1rem; font-weight: 700;
-            padding: 0 32px; height: 54px;
-            margin-right: 8px; margin-left: 8px; cursor: pointer;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d3a2a 100%);
+            color: #fff; border: none; border-radius: 999px;
+            font-size: 1.05rem; font-weight: 700;
+            padding: 0 40px; height: 64px;
+            margin-right: 10px; margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px rgba(27, 33, 26,0.2);
+            box-shadow: 
+                0 8px 24px rgba(27, 33, 26, 0.3),
+                0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+            font-family: inherit; letter-spacing: 0.02em;
+            position: relative; overflow: hidden;
+        }
+        .hero-search-bar button[type="submit"]::before {
+            content: '';
+            position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .hero-search-bar button[type="submit"]:hover::before {
+            left: 100%;
         }
         .hero-search-bar button[type="submit"]:hover,
         .hero-search-bar button[type="submit"]:focus {
-            background: var(--primary-hover);
+            background: linear-gradient(135deg, var(--primary-hover) 0%, #3a4a3a 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(27, 33, 26,0.3);
+            box-shadow: 
+                0 12px 32px rgba(27, 33, 26, 0.4),
+                0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+        }
+        .hero-search-bar button[type="submit"]:active {
+            transform: translateY(0);
+        }
+        @@keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 48px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+        }
+        .hero-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .hero-feature-item i {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+        .hero-feature-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+            border-color: rgba(255, 184, 0, 0.3);
+        }
+        @@media (max-width: 768px) {
+            .hero-banner-custom { padding: 100px 0 80px 0; }
+            .hero-banner-custom h1 { font-size: 2.75rem; }
+            .hero-banner-custom p.lead { font-size: 1.2rem; }
+            .hero-search-bar { height: 70px; padding-left: 20px; }
+            .hero-search-bar button[type="submit"] { padding: 0 28px; height: 56px; font-size: 0.95rem; }
+            .hero-features { gap: 16px; margin-top: 32px; }
+            .hero-feature-item { font-size: 0.85rem; padding: 10px 16px; }
+            .featured-events-heading { font-size: 2rem !important; }
+            .event-section-header { margin-bottom: 2.5rem; }
+            .event-filter-btns { gap: 8px; }
+            .month-btn { font-size: 0.875rem; padding: 8px 18px; }
+            .empty-events-state { padding: 60px 20px; }
+            .empty-events-icon { font-size: 3rem; }
+            .empty-events-title { font-size: 1.25rem; }
+            .category-section .section-heading {
+                font-size: 2rem;
+            }
+            .category-section .text-muted {
+                font-size: 1rem;
+                margin-bottom: 2rem !important;
+            }
+            .category-cards-row {
+                gap: 20px;
+            }
+            .category-card {
+                min-width: 200px;
+                max-width: 220px;
+                height: 200px;
+                padding: 36px 24px;
+            }
+            .category-icon {
+                font-size: 2.75rem;
+                margin-bottom: 16px;
+            }
+            .category-label {
+                font-size: 1.1rem;
+            }
         }
 
-        /* Featured Events Grid */
+        /* Featured Events Grid - Modern Minimalist */
         .featured-events-section {
             width: 100vw;
             position: relative;
             left: 50%; right: 50%;
             margin-left: -50vw; margin-right: -50vw;
-            background: #f5f7fa;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             margin-bottom: 0;
             display: flex;
             flex-direction: column;
@@ -147,47 +292,102 @@
         .centered-container {
             max-width: 1440px;
             margin-left: auto; margin-right: auto;
-            padding-left: 20px; padding-right: 20px;
+            padding-left: 24px; padding-right: 24px;
             width: 100%;
         }
-        .event-section-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; }
-        .featured-events-heading { margin-bottom: 36px !important; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; color: #181c32; text-align: center; }
+        .event-section-header { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin-bottom: 4rem; 
+        }
+        .featured-events-heading { 
+            margin-bottom: 40px !important; 
+            font-size: 3rem; 
+            font-weight: 900; 
+            letter-spacing: -0.04em; 
+            color: var(--text-primary); 
+            text-align: center;
+            line-height: 1.1;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .featured-events-heading .text-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
         .event-filter-btns {
-            margin-top: 8px;
+            margin-top: 12px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 12px;
         }
         .month-btn {
-            background: #fff;
-            border: 1.5px solid #eaeaea;
-            color: #181c32;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(27, 33, 26, 0.1);
+            color: var(--text-secondary);
             font-weight: 600;
             border-radius: 999px;
-            padding: 0.7rem 1.8rem;
-            margin: 0 0.19em;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
+            padding: 10px 24px;
+            margin: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 0.95rem;
             cursor: pointer;
             text-decoration: none !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-shadow: 0 2px 8px rgba(27, 33, 26, 0.06);
         }
         .month-btn.active, .month-btn:hover, .month-btn:focus {
             background: var(--primary-color);
             color: #fff;
-            border: 1.5px solid var(--primary-color);
+            border: 1px solid var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(27, 33, 26,0.2);
+            box-shadow: 0 6px 20px rgba(27, 33, 26, 0.2);
         }
 
+        .empty-events-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(27, 33, 26, 0.08);
+            margin: 40px 0;
+        }
+        .empty-events-icon {
+            font-size: 4rem;
+            color: rgba(27, 33, 26, 0.2);
+            margin-bottom: 24px;
+            display: block;
+        }
+        .empty-events-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: -0.02em;
+        }
+        .empty-events-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
         .event-cards-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
+            gap: 32px;
             align-items: stretch;
             justify-items: center;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         .event-card-modern {
@@ -323,35 +523,135 @@
             box-shadow: 0 4px 18px rgba(27, 33, 26, 0.16);
         }
 
-        /* Category Cards Section */
-        .category-section { background: #f5f7fa; margin-bottom: 0; }
+        /* Category Cards Section - Modern Minimalist Redesign */
+        .category-section { 
+            background: transparent; 
+            margin-bottom: 0; 
+        }
+
+        .category-section .section-heading {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.1;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .category-section .text-muted {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 3rem !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
         .category-cards-row {
-            display: flex; justify-content: center; gap: 40px;
-            flex-wrap: wrap; margin-top: 0; margin-bottom: 0;
+            display: flex; 
+            justify-content: center; 
+            gap: 32px;
+            flex-wrap: wrap; 
+            margin-top: 0; 
+            margin-bottom: 0;
         }
+
         .category-card {
-            background: #fff;
-            border-radius: 24px;
-            min-width: 220px; max-width: 240px; width: 100%; height: 200px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: all 0.3s ease;
-            padding: 40px 30px; margin-bottom: 0;
-            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d3a2a 100%);
+            border-radius: 20px;
+            min-width: 240px; 
+            max-width: 280px; 
+            width: 100%; 
+            height: 240px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 48px 32px; 
+            margin-bottom: 0;
+            position: relative; 
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 8px 32px rgba(27, 33, 26, 0.2);
         }
+
         .category-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 5px;
-            background: var(--gradient-accent);
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 184, 0, 0.1) 0%, rgba(252, 81, 48, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .category-card:hover, .category-card:focus {
-            background: #fff; color: var(--primary-color);
-            box-shadow: 0 15px 40px rgba(27, 33, 26,0.2);
-            text-decoration: none; transform: translateY(-8px);
+
+        .category-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .category-icon { font-size: 3.2rem; color: var(--primary-color); margin-bottom: 0.8em; transition: all 0.3s ease; }
-        .category-card:hover .category-icon { transform: scale(1.1); color: #FFB800; }
-        .category-label { font-size: 1.1rem; font-weight: 700; color: #232b36; margin-top: 0.25em; letter-spacing: 0.01em; text-align: center; }
+
+        .category-card:hover::before,
+        .category-card:focus::before {
+            opacity: 1;
+        }
+
+        .category-card:hover::after,
+        .category-card:focus::after {
+            opacity: 1;
+        }
+
+        .category-card:hover, 
+        .category-card:focus {
+            background: linear-gradient(135deg, var(--primary-hover) 0%, #3a4a3a 100%);
+            color: #fff;
+            box-shadow: 0 16px 48px rgba(27, 33, 26, 0.3);
+            text-decoration: none; 
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .category-icon { 
+            font-size: 3.5rem; 
+            color: var(--secondary-color); 
+            margin-bottom: 20px; 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        } 
+
+        .category-card:hover .category-icon { 
+            transform: scale(1.2) translateY(-6px) rotate(5deg); 
+            color: #fff;
+            filter: drop-shadow(0 6px 12px rgba(255, 184, 0, 0.4));
+        } 
+
+        .category-label { 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            color: #fff; 
+            margin-top: 0; 
+            letter-spacing: -0.01em; 
+            text-align: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
 
         /* Loyalty Promo Banner */
         .loyalty-promo-banner {
@@ -411,7 +711,7 @@
 </head>
 <body>
     <!-- HERO -->
-    <div class="hero-banner-custom section-spacer bg-white">
+    <div class="hero-banner-custom section-spacer">
         <div class="container">
             <h1>Discover Your Next Experience</h1>
             <p class="lead">Find and book tickets for concerts, theatre, cultural events and more</p>
@@ -427,6 +727,24 @@
                     <button type="submit">Search</button>
                 </div>
             </form>
+            <div class="hero-features">
+                <div class="hero-feature-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Browse Events</span>
+                </div>
+                <div class="hero-feature-item">
+                    <i class="fas fa-tags"></i>
+                    <span>Filter by Category</span>
+                </div>
+                <div class="hero-feature-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Find by Location</span>
+                </div>
+                <div class="hero-feature-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Search by Date</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -435,7 +753,7 @@
         <div class="centered-container">
             <div class="event-section-header text-center">
                 <h2 class="featured-events-heading section-heading mb-3">
-                    What's Happening <span class="text-primary">This Month</span>
+                    Featured <span class="text-primary">Events</span>
                 </h2>
                 <div class="event-filter-btns">
                     <a href="/Events/Featured?filter=thismonth" class="month-btn @(ViewBag.CurrentFilter=="thismonth" ? "active" : "")">This Month</a>
@@ -455,19 +773,22 @@
             }
             else
             {
-                <div class="text-center text-muted my-5 py-5">
-                    <i class="fas fa-calendar-times fa-3x mb-3" style="color: #ccc;"></i>
-                    <h4>No featured events found</h4>
-                    <p>Check back soon for upcoming events!</p>
+                <div class="empty-events-state">
+                    <i class="fas fa-calendar-times empty-events-icon"></i>
+                    <h4 class="empty-events-title">No featured events available</h4>
+                    <p class="empty-events-text">We're updating our selection—please revisit soon!</p>
                 </div>
             }
         </div>
     </div>
 
     <!-- CATEGORY CARDS -->
-    <div class="category-section section-spacer bg-offwhite">
+    <div class="category-section section-spacer">
         <div class="centered-container">
             <h2 class="section-heading">Browse by Category</h2>
+            <p class="text-muted" style="text-align: center;">
+                Choose a category to discover events tailored to your interests.
+            </p>
             <div class="category-cards-row">
                 <a href="/Events/Category/Concert" class="category-card text-decoration-none">
                     <div class="category-icon mb-2"><i class="fas fa-music"></i></div>
