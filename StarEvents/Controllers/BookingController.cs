@@ -14,7 +14,7 @@ namespace StarEvents.Controllers
         public ActionResult Summary(int eventId, int seatCategoryId, int quantity)
         {
             if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Account", new { returnUrl = Request.RawUrl });
+                return RedirectToAction("Index", "Login", new { returnUrl = Request.RawUrl });
 
             try
             {

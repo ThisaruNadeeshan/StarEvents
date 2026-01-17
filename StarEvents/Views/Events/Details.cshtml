@@ -1018,38 +1018,32 @@
             }
         });
 
-        // Prevent booking if not logged in
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            const isLoggedIn = @((isLoggedIn).ToString().ToLower());
-            if (!isLoggedIn) {
-                e.preventDefault();
-                window.location.href = '@Url.Action("Login", "Account", new { returnUrl = Request.RawUrl })';
-            }
-        });
-
         // Initialize
         updateSeatDisplay();
 
+        // Single event listener for form submission - handles both validation and login check
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
-    const isLoggedIn = @((isLoggedIn).ToString().ToLower());
-    const selectedSeatCategory = document.getElementById('selectedSeatCategory').value;
-    const seatError = document.getElementById('seatError');
+            const isLoggedIn = @((isLoggedIn).ToString().ToLower());
+            const selectedSeatCategory = document.getElementById('selectedSeatCategory').value;
+            const seatError = document.getElementById('seatError');
 
-    // Hide previous error
-    seatError.style.display = "none";
+            // Hide previous error
+            seatError.style.display = "none";
 
-    // Check seat category
-    if (!selectedSeatCategory) {
-        e.preventDefault();
-        seatError.style.display = "block";
-        return;
-    }
+            // Check login first
+            if (!isLoggedIn) {
+                e.preventDefault();
+                var returnUrl = window.location.pathname + window.location.search;
+                window.location.href = '@Url.Action("Index", "Login")?returnUrl=' + encodeURIComponent(returnUrl);
+                return;
+            }
 
-    // Check login
-    if (!isLoggedIn) {
-        e.preventDefault();
-        window.location.href = '@Url.Action("Login", "Account", new { returnUrl = Request.RawUrl })';
-    }
-});
+            // Check seat category
+            if (!selectedSeatCategory) {
+                e.preventDefault();
+                seatError.style.display = "block";
+                return;
+            }
+        });
     </script>
 }

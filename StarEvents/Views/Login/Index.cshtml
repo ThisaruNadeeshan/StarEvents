@@ -371,6 +371,10 @@
         @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { autocomplete = "off" }))
         {
             @Html.AntiForgeryToken()
+            @if (ViewBag.ReturnUrl != null)
+            {
+                @Html.Hidden("returnUrl", ViewBag.ReturnUrl)
+            }
 
             <div class="form-group">
                 <label class="form-label" for="Email">Email</label>
