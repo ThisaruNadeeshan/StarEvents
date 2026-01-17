@@ -34,12 +34,13 @@
 
             <div class="collapse navbar-collapse" id="mainNav">
 
-                @* PRIMARY NAVIGATION LINKS: Home, Events, About Us, Contact Us *@
+                @* PRIMARY NAVIGATION LINKS: Home, Events, About Us, Contact Us, AI Assistant *@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item @Html.IsActive("Home", "Index")"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item @Html.IsControllerActive("Events")"><a class="nav-link" href="/Events">Events</a></li>
                     <li class="nav-item @Html.IsActive("Home", "About")"><a class="nav-link" href="/Home/About">About</a></li>
                     <li class="nav-item @Html.IsActive("Home", "Contact")"><a class="nav-link" href="/Home/Contact">Contact</a></li>
+                    <li class="nav-item @Html.IsControllerActive("Chatbot")"><a class="nav-link" href="/Chatbot"><i class="fas fa-robot"></i> AI Assistant</a></li>
                 </ul>
 
                 @* USER MENU OR LOGIN/REGISTER (safe partial via child action) *@

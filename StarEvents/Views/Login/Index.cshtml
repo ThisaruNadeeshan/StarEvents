@@ -371,9 +371,9 @@
         @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { autocomplete = "off" }))
         {
             @Html.AntiForgeryToken()
-            @if (ViewBag.ReturnUrl != null)
+            if (ViewBag.ReturnUrl != null)
             {
-                @Html.Hidden("returnUrl", ViewBag.ReturnUrl)
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
             }
 
             <div class="form-group">

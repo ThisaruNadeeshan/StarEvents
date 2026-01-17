@@ -23,9 +23,16 @@ StarEvents is a full-featured ASP.NET MVC web application for discovering, booki
   - Secure authentication and password management
   - User roles: Customer, Organizer, Admin
 
+- **AI Chatbot**
+  - Customer-facing AI assistant powered by OpenAI
+  - Access booking history and available events
+  - Get real-time seat availability and event information
+  - Integrated into main navigation for easy access
+
 - **Integrations**
   - ImageKit for cloud image storage (profile photos, event images, QR codes)
   - Resend for transactional emails (welcome emails, booking confirmations)
+  - OpenAI API for AI chatbot functionality
 
 - **Other Highlights**
   - Modern, responsive UI
@@ -57,10 +64,11 @@ The project uses **Entity Framework Code First** with migrations and **Supabase 
    ```xml
    <connectionStrings>
        <add name="StarEventsDBEntities" 
-            connectionString="Host=YOUR_HOST;Port=5432;Database=postgres;Username=YOUR_USERNAME;Password=YOUR_PASSWORD;SSL Mode=Require;Trust Server Certificate=true;Pooling=true" 
+            connectionString="Host=YOUR_HOST;Port=5432;Database=postgres;Username=YOUR_USERNAME;Password=YOUR_PASSWORD;SslMode=Require;TrustServerCertificate=true;Pooling=true;Timeout=30" 
             providerName="Npgsql" />
    </connectionStrings>
    ```
+   **Note**: Use `SslMode` (not `SSL Mode`) and `TrustServerCertificate` (not `Trust Server Certificate`) for proper PostgreSQL connection.
 
 3. **Update Entity Framework Provider** in `Web.config` (already configured):
    ```xml
@@ -102,6 +110,18 @@ Update `Web.config` with your Resend API key:
 </appSettings>
 ```
 
+#### OpenAI (for AI Chatbot)
+Update `Web.config` with your OpenAI API key:
+```xml
+<appSettings>
+    <add key="OpenAI.ApiKey" value="your_openai_api_key" />
+    <add key="OpenAI.Model" value="gpt-4o-mini" />
+    <add key="OpenAI.MaxTokens" value="1000" />
+    <add key="OpenAI.Temperature" value="0.7" />
+</appSettings>
+```
+**Note**: The chatbot requires a valid OpenAI API key. Without it, the chatbot will display a configuration error message.
+
 ### 5. Build and Run
 - Press `F5` or use the "Start" button in Visual Studio.
 
@@ -112,7 +132,8 @@ Update `Web.config` with your Resend API key:
 - **Database**: Supabase (PostgreSQL) with Npgsql provider
 - **Image Storage**: ImageKit
 - **Email Service**: Resend
-- **Frontend**: Bootstrap 5, jQuery 3.7.0
+- **AI Service**: OpenAI API (GPT-4o-mini)
+- **Frontend**: Bootstrap 5, jQuery 3.7.0, Font Awesome 6.4.0
 
 ## Default Login Credentials
 
@@ -121,6 +142,25 @@ After running migrations, you can log in with the seeded admin account:
 - **Password**: `Admin@123`
 
 Sample organizer and customer accounts are also seeded with password `Org@123` and `Customer@123` respectively.
+
+## AI Chatbot
+
+The application includes an AI-powered chatbot accessible from the main navigation. The chatbot can:
+- Answer questions about available events
+- Show seat availability and pricing information
+- Display user's booking history (for logged-in customers)
+- Provide general information about the platform
+
+To use the chatbot:
+1. Ensure you have a valid OpenAI API key configured in `Web.config`
+2. Log in to your account
+3. Click "AI Assistant" in the navigation bar
+4. Start chatting with the AI assistant
+
+The chatbot uses context-aware prompts that include:
+- User's recent booking history (for customers)
+- Currently available events with seat information
+- Event details, venues, and pricing
 
 ## License
 
