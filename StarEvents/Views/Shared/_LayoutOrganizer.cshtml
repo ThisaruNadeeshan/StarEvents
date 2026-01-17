@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
-            --primary: #1259f3;
-            --primary-dark: #0d47c1;
-            --primary-light: #e8efff;
-            --secondary: #1a237e;
+            --primary: #1B211A;
+            --primary-dark: #2A3329;
+            --primary-light: #f8faf9;
+            --secondary: #FFB800;
             --accent: #ff6b35;
             --success: #00c853;
             --warning: #ffab00;
@@ -59,7 +59,7 @@
         /* Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
-            background: linear-gradient(180deg, var(--dark) 0%, #151722 100%);
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: var(--white);
             transition: var(--transition);
             position: fixed;
@@ -81,7 +81,7 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            background: rgba(22, 22, 34, 0.95);
+            background: rgba(27, 33, 26, 0.95);
             min-height: 80px;
             flex-shrink: 0;
         }
@@ -187,7 +187,7 @@
         .nav-item.active {
             background: var(--primary);
             color: var(--white);
-            box-shadow: 0 4px 12px rgba(18, 89, 243, 0.3);
+            box-shadow: 0 4px 12px rgba(27, 33, 26, 0.3);
         }
 
         .nav-item.active::before {
@@ -455,7 +455,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <img src="@Url.Content("~/Content/logo-noBG.png")" alt="StarEvents Logo" />
+                    <img src="@Url.Content("~/Content/startevent_logo.png")" alt="StarEvents Logo" />
                 </div>
                 <div class="brand-info">
                     <div class="brand-text">Star Events</div>

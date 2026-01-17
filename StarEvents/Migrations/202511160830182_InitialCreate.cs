@@ -8,7 +8,7 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.ActivityLogs",
+                "public.ActivityLogs",
                 c => new
                     {
                         ActivityLogId = c.Int(nullable: false, identity: true),
@@ -21,11 +21,11 @@
                         UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.ActivityLogId)
-                .ForeignKey("dbo.Users", t => t.UserId)
+                .ForeignKey("public.Users", t => t.UserId)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.Users",
+                "public.Users",
                 c => new
                     {
                         UserId = c.Int(nullable: false, identity: true),
@@ -39,7 +39,7 @@
                 .PrimaryKey(t => t.UserId);
             
             CreateTable(
-                "dbo.Admins",
+                "public.Admins",
                 c => new
                     {
                         AdminId = c.Int(nullable: false),
@@ -47,11 +47,11 @@
                         Notes = c.String(),
                     })
                 .PrimaryKey(t => t.AdminId)
-                .ForeignKey("dbo.Users", t => t.AdminId)
+                .ForeignKey("public.Users", t => t.AdminId)
                 .Index(t => t.AdminId);
             
             CreateTable(
-                "dbo.Bookings",
+                "public.Bookings",
                 c => new
                     {
                         BookingId = c.Int(nullable: false, identity: true),
@@ -67,13 +67,13 @@
                         User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.BookingId)
-                .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.User_UserId)
+                .ForeignKey("public.Events", t => t.EventId, cascadeDelete: true)
+                .ForeignKey("public.Users", t => t.User_UserId)
                 .Index(t => t.EventId)
                 .Index(t => t.User_UserId);
             
             CreateTable(
-                "dbo.Events",
+                "public.Events",
                 c => new
                     {
                         EventId = c.Int(nullable: false, identity: true),
@@ -92,13 +92,13 @@
                         User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.EventId)
-                .ForeignKey("dbo.Users", t => t.User_UserId)
-                .ForeignKey("dbo.Venues", t => t.VenueId)
+                .ForeignKey("public.Users", t => t.User_UserId)
+                .ForeignKey("public.Venues", t => t.VenueId)
                 .Index(t => t.VenueId)
                 .Index(t => t.User_UserId);
             
             CreateTable(
-                "dbo.EventDiscounts",
+                "public.EventDiscounts",
                 c => new
                     {
                         DiscountId = c.Int(nullable: false, identity: true),
@@ -117,11 +117,11 @@
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.DiscountId)
-                .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
+                .ForeignKey("public.Events", t => t.EventId, cascadeDelete: true)
                 .Index(t => t.EventId);
             
             CreateTable(
-                "dbo.SeatCategories",
+                "public.SeatCategories",
                 c => new
                     {
                         SeatCategoryId = c.Int(nullable: false, identity: true),
@@ -132,11 +132,11 @@
                         AvailableSeats = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.SeatCategoryId)
-                .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
+                .ForeignKey("public.Events", t => t.EventId, cascadeDelete: true)
                 .Index(t => t.EventId);
             
             CreateTable(
-                "dbo.Tickets",
+                "public.Tickets",
                 c => new
                     {
                         TicketId = c.Int(nullable: false, identity: true),
@@ -148,13 +148,13 @@
                         CreatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.TicketId)
-                .ForeignKey("dbo.Bookings", t => t.BookingId, cascadeDelete: true)
-                .ForeignKey("dbo.SeatCategories", t => t.SeatCategoryId, cascadeDelete: false)
+                .ForeignKey("public.Bookings", t => t.BookingId, cascadeDelete: true)
+                .ForeignKey("public.SeatCategories", t => t.SeatCategoryId, cascadeDelete: false)
                 .Index(t => t.BookingId)
                 .Index(t => t.SeatCategoryId);
             
             CreateTable(
-                "dbo.Venues",
+                "public.Venues",
                 c => new
                     {
                         VenueId = c.Int(nullable: false, identity: true),
@@ -166,7 +166,7 @@
                 .PrimaryKey(t => t.VenueId);
             
             CreateTable(
-                "dbo.Payments",
+                "public.Payments",
                 c => new
                     {
                         PaymentId = c.Int(nullable: false, identity: true),
@@ -178,11 +178,11 @@
                         PaidAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.PaymentId)
-                .ForeignKey("dbo.Bookings", t => t.BookingId, cascadeDelete: true)
+                .ForeignKey("public.Bookings", t => t.BookingId, cascadeDelete: true)
                 .Index(t => t.BookingId);
             
             CreateTable(
-                "dbo.CustomerProfiles",
+                "public.CustomerProfiles",
                 c => new
                     {
                         CustomerId = c.Int(nullable: false),
@@ -195,11 +195,11 @@
                         Gender = c.String(),
                     })
                 .PrimaryKey(t => t.CustomerId)
-                .ForeignKey("dbo.Users", t => t.CustomerId)
+                .ForeignKey("public.Users", t => t.CustomerId)
                 .Index(t => t.CustomerId);
             
             CreateTable(
-                "dbo.CustomerCards",
+                "public.CustomerCards",
                 c => new
                     {
                         CardId = c.Int(nullable: false, identity: true),
@@ -211,11 +211,11 @@
                         IsDefault = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.CardId)
-                .ForeignKey("dbo.CustomerProfiles", t => t.CustomerId, cascadeDelete: true)
+                .ForeignKey("public.CustomerProfiles", t => t.CustomerId, cascadeDelete: true)
                 .Index(t => t.CustomerId);
             
             CreateTable(
-                "dbo.LoyaltyPoints",
+                "public.LoyaltyPoints",
                 c => new
                     {
                         LoyaltyId = c.Int(nullable: false, identity: true),
@@ -229,11 +229,11 @@
                         Status = c.String(),
                     })
                 .PrimaryKey(t => t.LoyaltyId)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("public.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.OrganizerProfiles",
+                "public.OrganizerProfiles",
                 c => new
                     {
                         OrganizerId = c.Int(nullable: false),
@@ -245,57 +245,57 @@
                         ProfilePhoto = c.String(),
                     })
                 .PrimaryKey(t => t.OrganizerId)
-                .ForeignKey("dbo.Users", t => t.OrganizerId)
+                .ForeignKey("public.Users", t => t.OrganizerId)
                 .Index(t => t.OrganizerId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.OrganizerProfiles", "OrganizerId", "dbo.Users");
-            DropForeignKey("dbo.LoyaltyPoints", "UserId", "dbo.Users");
-            DropForeignKey("dbo.CustomerProfiles", "CustomerId", "dbo.Users");
-            DropForeignKey("dbo.CustomerCards", "CustomerId", "dbo.CustomerProfiles");
-            DropForeignKey("dbo.Bookings", "User_UserId", "dbo.Users");
-            DropForeignKey("dbo.Payments", "BookingId", "dbo.Bookings");
-            DropForeignKey("dbo.Events", "VenueId", "dbo.Venues");
-            DropForeignKey("dbo.Events", "User_UserId", "dbo.Users");
-            DropForeignKey("dbo.Tickets", "SeatCategoryId", "dbo.SeatCategories");
-            DropForeignKey("dbo.Tickets", "BookingId", "dbo.Bookings");
-            DropForeignKey("dbo.SeatCategories", "EventId", "dbo.Events");
-            DropForeignKey("dbo.EventDiscounts", "EventId", "dbo.Events");
-            DropForeignKey("dbo.Bookings", "EventId", "dbo.Events");
-            DropForeignKey("dbo.Admins", "AdminId", "dbo.Users");
-            DropForeignKey("dbo.ActivityLogs", "UserId", "dbo.Users");
-            DropIndex("dbo.OrganizerProfiles", new[] { "OrganizerId" });
-            DropIndex("dbo.LoyaltyPoints", new[] { "UserId" });
-            DropIndex("dbo.CustomerCards", new[] { "CustomerId" });
-            DropIndex("dbo.CustomerProfiles", new[] { "CustomerId" });
-            DropIndex("dbo.Payments", new[] { "BookingId" });
-            DropIndex("dbo.Tickets", new[] { "SeatCategoryId" });
-            DropIndex("dbo.Tickets", new[] { "BookingId" });
-            DropIndex("dbo.SeatCategories", new[] { "EventId" });
-            DropIndex("dbo.EventDiscounts", new[] { "EventId" });
-            DropIndex("dbo.Events", new[] { "User_UserId" });
-            DropIndex("dbo.Events", new[] { "VenueId" });
-            DropIndex("dbo.Bookings", new[] { "User_UserId" });
-            DropIndex("dbo.Bookings", new[] { "EventId" });
-            DropIndex("dbo.Admins", new[] { "AdminId" });
-            DropIndex("dbo.ActivityLogs", new[] { "UserId" });
-            DropTable("dbo.OrganizerProfiles");
-            DropTable("dbo.LoyaltyPoints");
-            DropTable("dbo.CustomerCards");
-            DropTable("dbo.CustomerProfiles");
-            DropTable("dbo.Payments");
-            DropTable("dbo.Venues");
-            DropTable("dbo.Tickets");
-            DropTable("dbo.SeatCategories");
-            DropTable("dbo.EventDiscounts");
-            DropTable("dbo.Events");
-            DropTable("dbo.Bookings");
-            DropTable("dbo.Admins");
-            DropTable("dbo.Users");
-            DropTable("dbo.ActivityLogs");
+            DropForeignKey("public.OrganizerProfiles", "OrganizerId", "public.Users");
+            DropForeignKey("public.LoyaltyPoints", "UserId", "public.Users");
+            DropForeignKey("public.CustomerProfiles", "CustomerId", "public.Users");
+            DropForeignKey("public.CustomerCards", "CustomerId", "public.CustomerProfiles");
+            DropForeignKey("public.Bookings", "User_UserId", "public.Users");
+            DropForeignKey("public.Payments", "BookingId", "public.Bookings");
+            DropForeignKey("public.Events", "VenueId", "public.Venues");
+            DropForeignKey("public.Events", "User_UserId", "public.Users");
+            DropForeignKey("public.Tickets", "SeatCategoryId", "public.SeatCategories");
+            DropForeignKey("public.Tickets", "BookingId", "public.Bookings");
+            DropForeignKey("public.SeatCategories", "EventId", "public.Events");
+            DropForeignKey("public.EventDiscounts", "EventId", "public.Events");
+            DropForeignKey("public.Bookings", "EventId", "public.Events");
+            DropForeignKey("public.Admins", "AdminId", "public.Users");
+            DropForeignKey("public.ActivityLogs", "UserId", "public.Users");
+            DropIndex("public.OrganizerProfiles", new[] { "OrganizerId" });
+            DropIndex("public.LoyaltyPoints", new[] { "UserId" });
+            DropIndex("public.CustomerCards", new[] { "CustomerId" });
+            DropIndex("public.CustomerProfiles", new[] { "CustomerId" });
+            DropIndex("public.Payments", new[] { "BookingId" });
+            DropIndex("public.Tickets", new[] { "SeatCategoryId" });
+            DropIndex("public.Tickets", new[] { "BookingId" });
+            DropIndex("public.SeatCategories", new[] { "EventId" });
+            DropIndex("public.EventDiscounts", new[] { "EventId" });
+            DropIndex("public.Events", new[] { "User_UserId" });
+            DropIndex("public.Events", new[] { "VenueId" });
+            DropIndex("public.Bookings", new[] { "User_UserId" });
+            DropIndex("public.Bookings", new[] { "EventId" });
+            DropIndex("public.Admins", new[] { "AdminId" });
+            DropIndex("public.ActivityLogs", new[] { "UserId" });
+            DropTable("public.OrganizerProfiles");
+            DropTable("public.LoyaltyPoints");
+            DropTable("public.CustomerCards");
+            DropTable("public.CustomerProfiles");
+            DropTable("public.Payments");
+            DropTable("public.Venues");
+            DropTable("public.Tickets");
+            DropTable("public.SeatCategories");
+            DropTable("public.EventDiscounts");
+            DropTable("public.Events");
+            DropTable("public.Bookings");
+            DropTable("public.Admins");
+            DropTable("public.Users");
+            DropTable("public.ActivityLogs");
         }
     }
 }

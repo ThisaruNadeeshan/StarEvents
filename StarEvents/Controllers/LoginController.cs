@@ -13,15 +13,16 @@ namespace StarEvents.Controllers
         private StarEventsDBEntities db = new StarEventsDBEntities();
 
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl = null)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         // POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string Email, string Password)
+        public ActionResult Index(string Email, string Password, string returnUrl = null)
         {
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
@@ -84,7 +85,13 @@ namespace StarEvents.Controllers
                     Session["ProfilePhoto"] = null;
                 }
 
-                // Redirect based on user role
+                // Redirect based on returnUrl first, then user role
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                
+                // Role-based redirects if no returnUrl
                 if (user.Role == "Admin")
                 {
                     return RedirectToAction("Dashboard", "Admin");
