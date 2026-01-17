@@ -28,13 +28,16 @@ namespace StarEvents.Controllers
             int totalTicketsSold = db.Tickets.Count();
             decimal totalRevenue = db.Payments.Where(p => p.Status == "Paid").Sum(p => (decimal?)p.Amount) ?? 0;
 
+            // Materialize first, then group in memory for PostgreSQL compatibility
             var salesTrend = db.Tickets
                 .Where(t => t.Booking.BookingDate != null && t.Booking.Status == "Paid")
-                .GroupBy(t => DbFunctions.TruncateTime(t.Booking.BookingDate))
+                .Include(t => t.Booking)
+                .ToList()
+                .GroupBy(t => t.Booking.BookingDate.Value.Date)
                 .OrderBy(g => g.Key)
                 .Select(g => new SalesTrendPoint
                 {
-                    Date = g.Key.Value,
+                    Date = g.Key,
                     TicketsSold = g.Count(),
                     Revenue = g.Sum(t => (decimal?)t.Booking.TotalAmount) ?? 0
                 }).ToList();
@@ -465,13 +468,14 @@ namespace StarEvents.Controllers
             var events = db.Events
                 .Include(e => e.User)
                 .Include(e => e.Venue)
+                .Include(e => e.SeatCategories)  // Added missing Include
                 .Include(e => e.Bookings.Select(b => b.Tickets))
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(search))
                 events = events.Where(e =>
                     e.Title.Contains(search) ||
-                    e.User.Username.Contains(search) ||
+                    (e.User != null && e.User.Username.Contains(search)) ||
                     (e.Venue != null && e.Venue.VenueName.Contains(search))
                 );
 
@@ -487,11 +491,11 @@ namespace StarEvents.Controllers
             {
                 EventId = e.EventId,
                 Title = e.Title,
-                OrganizerName = e.User.Username,
+                OrganizerName = e.User != null ? e.User.Username : "(N/A)",
                 VenueName = e.Venue != null ? e.Venue.VenueName : "(N/A)",
                 EventDate = e.EventDate,
-                TicketsSold = e.Bookings.SelectMany(b => b.Tickets).Count(),
-                TotalTickets = e.SeatCategories.Sum(sc => sc.TotalSeats),
+                TicketsSold = e.Bookings != null ? e.Bookings.SelectMany(b => b.Tickets ?? new List<Models.Ticket>()).Count() : 0,
+                TotalTickets = e.SeatCategories != null && e.SeatCategories.Any() ? e.SeatCategories.Sum(sc => sc.TotalSeats) : 0,
                 Revenue = db.Payments
                     .Where(p => p.Booking.EventId == e.EventId && p.Status == "Paid")
                     .Sum(p => (decimal?)p.Amount) ?? 0,
@@ -821,13 +825,16 @@ namespace StarEvents.Controllers
             if (!string.IsNullOrEmpty(eventName))
                 bookings = bookings.Where(b => b.Event.Title.ToLower() == eventName.ToLower());
 
-            var grouped = bookings
+            // Materialize bookings first, then group in memory for PostgreSQL compatibility
+            var bookingsList = bookings.ToList();
+
+            var grouped = bookingsList
                 .GroupBy(b => new
                 {
                     b.Event.Title,
                     b.Event.Category,
                     Organizer = b.Event.User.Username,
-                    Date = DbFunctions.TruncateTime(b.BookingDate)
+                    Date = b.BookingDate.HasValue ? b.BookingDate.Value.Date : (DateTime?)null
                 })
                 .Select(g => new
                 {

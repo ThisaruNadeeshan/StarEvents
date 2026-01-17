@@ -30,7 +30,7 @@ StarEvents is a full-featured ASP.NET MVC web application for discovering, booki
 - **Other Highlights**
   - Modern, responsive UI
   - Entity Framework Code First with migrations
-  - Built with ASP.NET MVC, Entity Framework 6, C#, and SQL Server
+  - Built with ASP.NET MVC, Entity Framework 6, C#, and Supabase (PostgreSQL)
 
 ## Getting Started
 
@@ -44,27 +44,41 @@ git clone https://github.com/ThisaruNadeeshan/StarEvents/
 
 ### 3. Database Configuration
 
-The project uses **Entity Framework Code First** with migrations.
+The project uses **Entity Framework Code First** with migrations and **Supabase PostgreSQL** as the database.
 
-1. **Create an empty SQL Server database** named `StarEventsDB` (or your preferred name).
+1. **Install Required Packages** via Package Manager Console:
+   ```powershell
+   Install-Package EntityFramework6.Npgsql -Version 6.4.1
+   Install-Package Npgsql -Version 4.1.9
+   ```
 
-2. **Update the connection string** in `Web.config`:
+2. **Configure Supabase Connection String** in `Web.config`:
+   The connection string is already configured for Supabase. If you need to update it, use this format:
    ```xml
    <connectionStrings>
        <add name="StarEventsDBEntities" 
-            connectionString="data source=YOUR_SERVER;initial catalog=StarEventsDB;integrated security=True;trustservercertificate=True;MultipleActiveResultSets=True;App=EntityFramework" 
-            providerName="System.Data.SqlClient" />
+            connectionString="Host=YOUR_HOST;Port=5432;Database=postgres;Username=YOUR_USERNAME;Password=YOUR_PASSWORD;SSL Mode=Require;Trust Server Certificate=true;Pooling=true" 
+            providerName="Npgsql" />
    </connectionStrings>
    ```
 
-3. **Run migrations** in Package Manager Console:
+3. **Update Entity Framework Provider** in `Web.config` (already configured):
+   ```xml
+   <entityFramework>
+       <providers>
+           <provider invariantName="Npgsql" type="Npgsql.NpgsqlServices, EntityFramework6.Npgsql" />
+       </providers>
+   </entityFramework>
+   ```
+
+4. **Run migrations** in Package Manager Console:
    ```powershell
-   Enable-Migrations -ContextTypeName StarEvents.Models.StarEventsDBEntities
-   Add-Migration InitialCreate
    Update-Database
    ```
 
-This will create all tables and relationships in your database.
+This will create all tables and relationships in your Supabase database, and seed initial data including:
+- Admin account (Email: `admin@starevents.com`, Password: `Admin@123`)
+- Sample organizers, customers, venues, events, bookings, and tickets
 
 ### 4. Configure External Services
 
@@ -95,10 +109,18 @@ Update `Web.config` with your Resend API key:
 
 - **Framework**: ASP.NET MVC 5.2.9
 - **ORM**: Entity Framework 6.5.1 (Code First)
-- **Database**: SQL Server
+- **Database**: Supabase (PostgreSQL) with Npgsql provider
 - **Image Storage**: ImageKit
 - **Email Service**: Resend
 - **Frontend**: Bootstrap 5, jQuery 3.7.0
+
+## Default Login Credentials
+
+After running migrations, you can log in with the seeded admin account:
+- **Email**: `admin@starevents.com`
+- **Password**: `Admin@123`
+
+Sample organizer and customer accounts are also seeded with password `Org@123` and `Customer@123` respectively.
 
 ## License
 

@@ -222,7 +222,8 @@ namespace StarEvents.Controllers
                     IsActive = true,
                     IsPublished = true,
                     CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
+                    UpdatedAt = DateTime.Now,
+                    User = user  // Set navigation property to ensure User_UserId is set
                 };
                 db.Events.Add(@event);
                 db.SaveChanges();
@@ -281,11 +282,16 @@ namespace StarEvents.Controllers
             if (organizer == null) return RedirectToAction("Dashboard");
 
             // Get all relevant events (materialize as a list)
-            var eventsList = db.Events
-                .Where(e => e.OrganizerId == organizer.OrganizerId &&
-                    (string.IsNullOrEmpty(search) || e.Title.Contains(search) || e.Category.Contains(search)))
-                .OrderByDescending(e => e.EventDate)
-                .ToList();
+            // Fix for PostgreSQL: build query conditionally to avoid parameter type issues
+            var eventsQuery = db.Events.Where(e => e.OrganizerId == organizer.OrganizerId);
+            
+            if (!string.IsNullOrEmpty(search))
+            {
+                eventsQuery = eventsQuery.Where(e => e.Title.Contains(search) || 
+                                                    (e.Category != null && e.Category.Contains(search)));
+            }
+            
+            var eventsList = eventsQuery.OrderByDescending(e => e.EventDate).ToList();
 
             // Get their IDs
             var eventIds = eventsList.Select(e => e.EventId).ToList();
@@ -924,8 +930,11 @@ namespace StarEvents.Controllers
             }).ToList();
 
             // Sales trend (group by booking date - day)
+            // Materialize first, then group in memory for PostgreSQL compatibility
             var salesTrend = ticketsQuery
-                .GroupBy(t => DbFunctions.TruncateTime(t.Booking.BookingDate))
+                .Include(t => t.Booking)
+                .ToList()
+                .GroupBy(t => t.Booking.BookingDate.HasValue ? t.Booking.BookingDate.Value.Date : (DateTime?)null)
                 .Select(g => new
                 {
                     Date = g.Key,
